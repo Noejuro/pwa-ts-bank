@@ -1,16 +1,37 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
 import App from './App';
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
+import { store } from './store'
+import { Provider } from 'react-redux';
+import './index.css';
 // import reportWebVitals from './reportWebVitals';
+import axios from 'axios';
+
+axios.defaults.baseURL = 'http://localhost:4000/api';
+
+axios.interceptors.request.use(request => {
+    // Edit request config
+    return request;
+}, error => {
+    return Promise.reject(error);
+});
+
+axios.interceptors.response.use(response => {
+    // Edit response config
+    return response;
+}, error => {
+    return Promise.reject(error);
+});
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>
 );
 
