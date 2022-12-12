@@ -1,8 +1,11 @@
 import React, { useEffect, useState } from 'react';
+import ConnectWidget from './utils/ConnectWidget';
 import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  
+  ConnectWidget('https://cdn.belvo.io/belvo-widget-1-stable.js');
 
   const [isReadyForInstall, setIsReadyForInstall] = useState(false);
 
@@ -10,7 +13,6 @@ function App() {
     window.addEventListener("beforeinstallprompt", (event) => {
       // Prevent the mini-infobar from appearing on mobile.
       event.preventDefault();
-      console.log("👍", "beforeinstallprompt", event);
       // Stash the event so it can be triggered later.
       window.deferredPrompt = event;
       // Remove the 'hidden' class from the install button container.
@@ -19,18 +21,15 @@ function App() {
   }, []);
 
   async function downloadApp() {
-    console.log("👍", "butInstall-clicked");
     const promptEvent = window.deferredPrompt;
     if (!promptEvent) {
       // The deferred prompt isn't available.
-      console.log("oops, no prompt event guardado en window");
       return;
     }
     // Show the install prompt.
     promptEvent.prompt();
     // Log the result
     const result = await promptEvent.userChoice;
-    console.log("👍", "userChoice", result);
     // Reset the deferred prompt variable, since
     // prompt() can only be called once.
     window.deferredPrompt = null;
@@ -57,6 +56,7 @@ function App() {
         </a>
 
         {isReadyForInstall ? <button onClick={downloadApp}> Download App </button> : null}
+        <div id="belvo" />
 
       </header>
     </div>
