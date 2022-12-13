@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react';
 import ConnectWidget from './utils/ConnectWidget';
 import logo from './logo.svg';
 import './App.css';
+import { useSelector } from 'react-redux';
+import { RootState } from './store';
+import Transactions from './views/Main/Transactions/Transactions';
 
 function App() {
-  
-  ConnectWidget('https://cdn.belvo.io/belvo-widget-1-stable.js');
+  // ConnectWidget('https://cdn.belvo.io/belvo-widget-1-stable.js');
+  const { user } = useSelector((state: RootState) => state.auth);
 
   const [isReadyForInstall, setIsReadyForInstall] = useState(false);
 
@@ -41,22 +44,15 @@ function App() {
 
   return (
     <div className="App">
+      
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
 
         {isReadyForInstall ? <button onClick={downloadApp}> Download App </button> : null}
         <div id="belvo" />
+
+        { user?.link && <Transactions /> }
+
+        
 
       </header>
     </div>

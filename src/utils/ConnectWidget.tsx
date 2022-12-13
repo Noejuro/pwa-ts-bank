@@ -3,7 +3,8 @@ import { useEffect } from "react";
 //Redux
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store';
-import { getAccessToken, reset, resetAssociate, associateBank } from '../features/bank/bankSlice'
+import { getAccessToken, associateBank, resetAssociate } from '../features/bank/bankSlice'
+import { updateUser } from "../features/auth/authSlice";
 
 interface EventCallback {
     eventName: "ERROR" | "WARNING",
@@ -32,7 +33,7 @@ interface ExitCallback {
 function ConnectWidget(src: string) {
 
     const dispatch = useDispatch<AppDispatch>();
-    const { access, isError, message, isRequested, isAssociated, isAssociatedError } = useSelector((state: RootState) => state.bank);
+    const { access, isAssociated } = useSelector((state: RootState) => state.bank);
 
     useEffect(() => {
         if(src !== "") {
@@ -67,6 +68,13 @@ function ConnectWidget(src: string) {
             window.belvoSDK.createWidget(access, config).build()
         }
     }, [access])
+
+    useEffect(() => {
+        if(isAssociated) {
+            dispatch(resetAssociate());
+            dispatch(updateUser());
+        }
+    }, [isAssociated])
 
     const createWidget = () => {
         // Function to call your server-side to generate the access_token and retrieve the your access token
