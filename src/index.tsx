@@ -8,7 +8,7 @@ import './index.css';
 // import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
-axios.defaults.baseURL = 'http://localhost:4000/api';
+axios.defaults.baseURL = 'https://pwa-ts-bank-api-production.up.railway.app/api';
 
 axios.interceptors.request.use(request => {
     // Edit request config
