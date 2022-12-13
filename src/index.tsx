@@ -5,6 +5,7 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { store } from './store'
 import { Provider } from 'react-redux';
 import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 // import reportWebVitals from './reportWebVitals';
 import axios from 'axios';
 
