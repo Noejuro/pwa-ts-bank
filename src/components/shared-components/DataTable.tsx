@@ -77,7 +77,7 @@ export default function Datatable(props: IProps): JSX.Element {
                     {!!data.length ?
                         <>
                             {data.map((item) => (
-                                <Grid item xs={12} sm={6} className={`${breakpointSM && 'px-2'} pb-3`} key={item.id}>
+                                <Grid item xs={12} sm={6} className={`${breakpointSM && 'px-2'} pb-3`} key={item.id} style={{width: 100}}>
                                     <Card className="w-100 h-100" style={{borderRadius: 15}}>
                                         <div className="d-flex flex-column">
                                             <div className="d-flex flex-row mx-0 px-3 py-2" style={{backgroundColor: "#20242f", color: "white"}}>
