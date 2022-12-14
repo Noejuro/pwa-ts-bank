@@ -4,11 +4,9 @@ import getConfig from '../../utils/axiosConfig'
 
 const API_URL = '/bank/'
 
-
-const config = getConfig();
-
 //Get access token
 const getAccessToken = async() => {
+    const config = getConfig();
     const response = await axios.get(`${API_URL}access_token`, config)
 
     return response.data
@@ -16,6 +14,7 @@ const getAccessToken = async() => {
 
 // Associate Bank
 const associateBank = async(body : AssociateBankProps) => {
+    const config = getConfig();
     const response = await axios.put(`${API_URL}associate_belvo`, body, config)
 
     const userString = localStorage.getItem('user');
@@ -29,6 +28,7 @@ const associateBank = async(body : AssociateBankProps) => {
 // Get Transactions List
 
 const getTransactions = async ({link, page} : GetTransactionsProps) => {
+    const config = getConfig();
     const response = await axios.get(`${API_URL}transactions?page=${page}&link=${link}`, config)
 
     return response.data

@@ -87,6 +87,7 @@ export const bankSlice = createSlice({
             state.isTransactionsError = false;
             state.message = '';
             state.isTransactions = false;
+            state.transactions = [];
         }
     },
     extraReducers: (builder) => {

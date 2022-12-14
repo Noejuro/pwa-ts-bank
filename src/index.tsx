@@ -4,10 +4,12 @@ import App from './App';
 import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import { store } from './store'
 import { Provider } from 'react-redux';
+import { createTheme } from '@mui/material';
+import { ThemeProvider } from '@emotion/react';
+import axios from 'axios';
 import './index.css';
 import 'bootstrap/dist/css/bootstrap.css';
 // import reportWebVitals from './reportWebVitals';
-import axios from 'axios';
 
 axios.defaults.baseURL = 'https://pwa-ts-bank-api-production.up.railway.app/api';
 
@@ -25,14 +27,27 @@ axios.interceptors.response.use(response => {
     return Promise.reject(error);
 });
 
+const theme = createTheme({
+  palette: {
+     primary: {
+        main: "#537895"
+      },
+     secondary: {
+        main: "#09203f"
+     }
+  },
+});
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
+    <ThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </ThemeProvider>
   </React.StrictMode>
 );
 
