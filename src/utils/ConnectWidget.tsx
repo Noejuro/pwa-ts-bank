@@ -30,7 +30,7 @@ interface ExitCallback {
     }
 }
 
-function ConnectWidget(src: string) {
+function ConnectWidget({ src }: { src: string }) : JSX.Element {
 
     const dispatch = useDispatch<AppDispatch>();
     const { access, isAssociated } = useSelector((state: RootState) => state.bank);
@@ -80,6 +80,8 @@ function ConnectWidget(src: string) {
         // Function to call your server-side to generate the access_token and retrieve the your access token
         dispatch(getAccessToken());
     }
+
+    return (<></>)
 }
 
 
