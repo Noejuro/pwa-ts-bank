@@ -33,6 +33,9 @@ export default function Login(): JSX.Element {
                             <Form />
                             <Typography variant='subtitle1' className="fw-bold"> Don't have an account? </Typography>
                             <Link to="/register"> Create an account </Link>
+                            <Hidden only={['sm', 'xs']}>
+                                <DownloadApp />
+                            </Hidden>
                         </div>
                     </div>
                 </Grid>
